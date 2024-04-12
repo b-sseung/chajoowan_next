@@ -26,6 +26,7 @@ const handler = async (req, res) => {
     const rows = await sheets.getRows();
     const start = body.startIndex == undefined ? 0 : body.startIndex;
     const end = body.endIndex == undefined ? rows.length : body.endIndex;
+
     // const table = rows.filter((row) => row.get(body.columnId).indexOf(body.word) !== -1);
     const table = rows.sort((r1, r2) => {
       const date1 = r1.get('date').slice(0, 10);
@@ -49,7 +50,7 @@ const handler = async (req, res) => {
 
     let result = {};
     table.forEach((element, index) => {
-      if (index < start && index > end) return;
+      if (index < start || index >= end) return;
       result = { ...result, [index]: { row: element.rowNumber, data: element.toObject() } };
     });
 

@@ -2,12 +2,26 @@ import DatePicker from 'react-datepicker';
 import styled, { css } from 'styled-components';
 import 'react-datepicker/dist/react-datepicker.css';
 import $ from 'jquery';
-import { useState, forwardRef, useEffect, useReducer } from 'react';
+import { useState, forwardRef, useEffect, useReducer, useContext } from 'react';
 import { getLocalJson } from '@/pages/api/api';
+import PortfolioContext from '@/context/context';
 import Image from 'next/image';
 import imageCompression from 'browser-image-compression';
-import { flexRow } from '@/src/css/common';
+import { flexRow, flexCol } from '@/src/css/common';
+
 // css
+const ParentStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '15px',
+
+  height: '100vh',
+  background: 'white',
+  padding: '15px',
+
+  position: 'relative',
+};
+
 const CustomDatePicker = styled.div(
   css`
     .custom-day {
@@ -39,7 +53,9 @@ const ImageBox = styled.div(
   css`
     width: 100%;
     overflow-x: scroll;
-    scrollbar-width: none;
+    padding: 10px;
+
+    border: 1px dashed black;
 
     :last-child {
       margin-right: 0px;
@@ -56,7 +72,9 @@ const RadioButton = ({ value, name, text, onChange }) => {
   return (
     <>
       <input type="radio" value={value} name={name} id={value} onChange={() => onChange(name, value)}></input>
-      <label htmlFor={value}>{text}</label>
+      <label htmlFor={value} style={{ marginLeft: '5px', marginRight: '10px' }}>
+        {text}
+      </label>
     </>
   );
 };
@@ -76,7 +94,7 @@ const SelectBox = ({ name, onChange }) => {
 
   useEffect(() => {
     const getList = async () => {
-      const result = await getLocalJson('../../localJson.json', 'source');
+      const result = await getLocalJson(`${prefix}/localJson.json'`, 'source');
       setList(result);
     };
     getList();
@@ -87,7 +105,7 @@ const SelectBox = ({ name, onChange }) => {
   };
 
   return (
-    <select name={name} onChange={(e) => onChangeValue(e)}>
+    <select name={name} style={{ border: '1px solid black' }} onChange={(e) => onChangeValue(e)}>
       <option key="none" value="">
         선택하기
       </option>
@@ -104,7 +122,7 @@ const SelectBox = ({ name, onChange }) => {
 };
 
 const ImageView = ({ data }) => {
-  return <Image width={100} height={100} alt="" src={data}></Image>;
+  return <Image width={200} height={200} style={{ objectFit: 'contain' }} alt="" src={data}></Image>;
 };
 
 // event
@@ -117,7 +135,6 @@ const UploadGallery = () => {
   const [initState, dispatch] = useReducer(uploadFileForm, {
     date: new Date(),
     file_data: '',
-    file_extension: '',
     source: '',
     source_url: '',
     source_account: '',
@@ -127,6 +144,7 @@ const UploadGallery = () => {
   const [selectDate, setSelectDate] = useState(new Date());
   const [month, setMonth] = useState(new Date().getMonth());
   const [images, setImages] = useState([]);
+  const { prefix } = useContext(PortfolioContext);
 
   const handleMonthChange = (date) => {
     setMonth(date.getMonth());
@@ -136,6 +154,9 @@ const UploadGallery = () => {
     dispatch({ type: type, value: value });
   };
 
+  const onChangeEvent = (e, target) => {
+    changeState(target, e.target.value);
+  };
   const onLoadFile = async (e) => {
     const extensions = [];
     const thumnails = [];
@@ -172,7 +193,7 @@ const UploadGallery = () => {
     $('#load').css('display', 'block');
     const date = initState['date'];
     const bodyYear = date.getFullYear();
-    const bodyDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate()}`;
+    const bodyDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
 
     const response = await fetch('/api/sheet-filter', {
       method: 'POST',
@@ -186,7 +207,7 @@ const UploadGallery = () => {
     const sheets = await response.json();
 
     let maxSeq = 0;
-    if (sheets.data.length > 0) {
+    if (Object.keys(sheets['data']).length > 0) {
       Object.values(sheets.data).forEach((value) => (maxSeq = maxSeq < Number.parseInt(value['seq']) ? Number.parseInt(value['seq']) : maxSeq));
     }
 
@@ -198,7 +219,7 @@ const UploadGallery = () => {
 
       const res_row = {
         ...fileData,
-        date: initState['date'],
+        date: bodyDate,
         seq: Number.parseInt(maxSeq) + index + 1,
         type: initState['type'],
         source: initState['source'],
@@ -220,11 +241,18 @@ const UploadGallery = () => {
       });
     }
     $('#load').css('display', 'none');
+    $('#source_account').val('');
+    $('#source_url').val('');
+
+    setImages([]);
+    changeState('file_data', '');
+    changeState('source_url', '');
+    changeState('cource_account', '');
   };
 
   return (
     <>
-      <div>
+      <div style={ParentStyle}>
         <div>
           <p>업로드 일자</p>
           <CustomDatePicker>
@@ -259,33 +287,52 @@ const UploadGallery = () => {
         {initState['source'] !== '' && (
           <div>
             <p>출처 계정</p>
-            <input style={{ width: '50%' }}></input>
+            <input id="source_account" style={{ width: '50%', border: '1px solid black' }} onChange={(e) => onChangeEvent(e, 'source_account')}></input>
           </div>
         )}
         {initState['source'] !== '' && (
           <div>
             <p>출처 URL</p>
-            <input style={{ width: '100%' }}></input>
+            <input id="source_url" style={{ width: '100%', border: '1px solid black' }} onChange={(e) => onChangeEvent(e, 'source_url')}></input>
           </div>
         )}
         {initState['type'] !== '' && (
           <div>
-            <p>{initState['type'] === 'image' ? '이미지' : '썸네일'}</p>
-            <label style={{ cursor: 'pointer' }} htmlFor="fileImage">
+            <p style={{ display: 'inline', marginRight: '15px' }}>{initState['type'] === 'image' ? '이미지' : '썸네일'}</p>
+            <label style={{ cursor: 'pointer', padding: '0px 15px', border: '1px dotted gray', borderRadius: '50px' }} htmlFor="fileImage">
               선택하기
             </label>
             <input id="fileImage" style={{ display: 'none' }} type="file" onChange={onLoadFile} multiple></input>
           </div>
         )}
-        <ImageBox>
-          {images.length > 0 &&
-            images.map((data, index) => {
-              return <ImageView key={index} data={data}></ImageView>;
-            })}
-        </ImageBox>
-        <button onClick={onSubmit}>등록하기</button>
+        {images.length > 0 && (
+          <ImageBox>
+            {images.length > 0 &&
+              images.map((data, index) => {
+                return <ImageView key={index} data={data}></ImageView>;
+              })}
+          </ImageBox>
+        )}
+        <button
+          style={{ margin: '5px auto', display: 'inline', padding: '10px 30px', borderRadius: '100px', background: 'limegreen', color: 'white', fontWeight: 'bold' }}
+          onClick={onSubmit}
+        >
+          등록하기
+        </button>
       </div>
-      <div id="load" style={{ display: 'none', width: '100%', position: 'absolute', top: '50%', textAlign: 'center' }}>
+      <div
+        id="load"
+        style={{
+          display: 'none',
+          width: '100%',
+          height: '100%',
+          position: 'absolute',
+          textAlign: 'center',
+          background: '#55555588',
+          fontSize: '30px',
+          fontWeight: 'bold',
+        }}
+      >
         loading...
       </div>
     </>

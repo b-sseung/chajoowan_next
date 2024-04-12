@@ -22,7 +22,7 @@ const UnderMenu = styled.div(
     width: min(98vw, 600px);
     height: 100%;
 
-    top: calc(100% - 50px);
+    top: calc(100% - 60px);
 
     &.open {
       animation: open-animation 0.2s linear;
@@ -36,7 +36,7 @@ const UnderMenu = styled.div(
 
     @keyframes open-animation {
       from {
-        top: calc(100% - 50px);
+        top: calc(100% - 60px);
       }
       to {
         top: 0;
@@ -48,7 +48,7 @@ const UnderMenu = styled.div(
         top: 0;
       }
       to {
-        top: calc(100% - 55px);
+        top: calc(100% - 60px);
       }
     }
   `
@@ -141,7 +141,7 @@ const NextContentItem = ({ row, isPlay, index, onClickItem }) => {
   return (
     <Item onClick={() => onClickItem(index)}>
       <Img>
-        <Image layout="fill" objectFit="cover" src={item['image']} alt="image"></Image>
+        <Image layout="fill" style={{ objectFit: 'cover' }} src={item['image']} alt="image"></Image>
       </Img>
       <Alt>
         <div>{item['date']}</div>
@@ -152,17 +152,15 @@ const NextContentItem = ({ row, isPlay, index, onClickItem }) => {
   );
 };
 
-const InfoItem = ({ text, link, type }) => {
-  const type1 = {
-    padding: '10px',
-    width: 'calc(100% / 2)',
-    aspectRatio: '1 / 1',
-  };
-  const type2 = {
-    padding: '10px',
-    width: 'calc(100% / 3)',
-    aspectRatio: '1 / 1',
-  };
+const InfoType1 = {
+  width: 'calc(100% / 2)',
+  aspectRatio: '1 / 1',
+};
+
+const InfoItemType2 = {
+  padding: '10px',
+  width: 'calc(100% / 3)',
+  aspectRatio: '1 / 1',
 };
 
 const MainMenu = ({ rows, onClickEvent }) => {
@@ -235,13 +233,13 @@ const MainMenu = ({ rows, onClickEvent }) => {
         <SwiperSlide>
           <div style={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100%' }}>
             <div style={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
-              <InfoItem text="인물소개" value="1" link="" type="type1"></InfoItem>
-              <InfoItem text="인스타그램" value="2" link="" type="type1"></InfoItem>
+              <CgProfile link="" style={InfoType1}></CgProfile>
+              {/* <InfoItem text="인스타그램" value="2" link="" type="type1"></InfoItem> */}
             </div>
             <div style={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
-              <InfoItem text="웨이보" value="3" link="" type="type2"></InfoItem>
+              {/* <InfoItem text="웨이보" value="3" link="" type="type2"></InfoItem>
               <InfoItem text="소속사" value="4" link="" type="type2"></InfoItem>
-              <InfoItem text="공식홈페이지" value="5" link="" type="type2"></InfoItem>
+              <InfoItem text="공식홈페이지" value="5" link="" type="type2"></InfoItem> */}
             </div>
           </div>
         </SwiperSlide>

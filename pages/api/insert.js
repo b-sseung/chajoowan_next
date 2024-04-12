@@ -38,6 +38,7 @@ const handler = async (req, res) => {
 
     return res.status(200).json({ message: 'ok' });
   } catch (e) {
+    console.log(e);
     return res.status(500).send({ message: 'faild' });
   }
 };
