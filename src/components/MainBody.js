@@ -4,7 +4,6 @@ import styled, { css } from 'styled-components';
 import { flexCol, flexRow } from '../css/common';
 import MainMenu from './MainMenu';
 import Image from 'next/image';
-import { getImages } from '../js';
 
 const ColumnBox = styled.div(
   flexCol,
@@ -79,22 +78,13 @@ const playImageStyle = {
 };
 const PlayImageBox = () => {};
 
-const MainBody = () => {
-  const [playList, setPlayList] = useState({});
+const MainBody = ({ images }) => {
+  const [playList, setPlayList] = useState(images);
   const [playListImage, setPlayListImage] = useState();
   const [playIndex, setPlayIndex] = useState(0);
 
   useEffect(() => {
-    const images = async () => {
-      const result = await getImages();
-      setPlayList(result);
-    };
-    images();
-  }, []);
-
-  useEffect(() => {
     const changeImage = () => {
-      if (Object.keys(playList).length == 0) return;
       const row = playList[playIndex]['data'];
       setPlayListImage(row['image']);
     };
@@ -119,7 +109,7 @@ const MainBody = () => {
           <p>19:99</p>
         </PlayBox>
       </ColumnBox>
-      <MainMenu rows={playList} onClickEvent={setPlayIndex}></MainMenu>
+      <MainMenu rows={images} onClickEvent={setPlayIndex}></MainMenu>
     </ColumnBox>
   );
 };

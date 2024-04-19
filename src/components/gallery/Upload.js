@@ -4,7 +4,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import $ from 'jquery';
 import { useState, forwardRef, useEffect, useReducer, useContext } from 'react';
 import { getLocalJson } from '@/pages/api/api';
-import PortfolioContext from '@/context/context';
 import Image from 'next/image';
 import imageCompression from 'browser-image-compression';
 import { flexRow, flexCol } from '@/src/css/common';
@@ -94,7 +93,7 @@ const SelectBox = ({ name, onChange }) => {
 
   useEffect(() => {
     const getList = async () => {
-      const result = await getLocalJson(`${prefix}/localJson.json'`, 'source');
+      const result = await getLocalJson('/localJson.json', 'source');
       setList(result);
     };
     getList();
@@ -144,7 +143,6 @@ const UploadGallery = () => {
   const [selectDate, setSelectDate] = useState(new Date());
   const [month, setMonth] = useState(new Date().getMonth());
   const [images, setImages] = useState([]);
-  const { prefix } = useContext(PortfolioContext);
 
   const handleMonthChange = (date) => {
     setMonth(date.getMonth());
