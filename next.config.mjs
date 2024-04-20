@@ -6,7 +6,7 @@ const nextConfig = {
   },
   trailingSlash: true, // 빌드 시 폴더 구조 그대로 생성하도록
   images: { unoptimized: true },
-  // output: 'export',
+  output: 'export',
 };
 
 export default nextConfig;
