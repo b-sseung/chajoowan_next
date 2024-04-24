@@ -22,6 +22,8 @@ const handler = async (req, res) => {
 
     const body = req.body;
 
+    console.log(doc);
+    console.log(body);
     const sheets = doc.sheetsByTitle[body.sheetName];
     const rows = await sheets.getRows();
     const start = body.startIndex == undefined ? 0 : body.startIndex;
@@ -56,7 +58,7 @@ const handler = async (req, res) => {
 
     return res.status(200).json({ data: result });
   } catch (e) {
-    console.log(e);
+    console.error('Error: ' + e);
     return res.status(500).json({ message: e });
   }
 };
