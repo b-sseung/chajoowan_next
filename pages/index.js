@@ -60,7 +60,6 @@ export const getServerSideProps = async () => {
   const response = await fetch(`${process.env.BASE_URL}/api/get`, {
     method: 'POST',
     headers: {
-      Accept: 'application/json',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ sheetName: '2024', startIndex: 0, endIndex: 5 }),
