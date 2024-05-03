@@ -324,7 +324,6 @@ const UploadGallery = () => {
           display: 'none',
           width: '100%',
           height: '100%',
-          position: 'absolute',
           textAlign: 'center',
           background: '#55555588',
           fontSize: '30px',
