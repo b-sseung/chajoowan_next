@@ -23,6 +23,8 @@ const handler = async (req, res) => {
     const { body } = req;
 
     console.log(doc);
+    console.log(req);
+    console.log(res);
     console.log(body);
     const sheets = doc.sheetsByTitle[body.sheetName];
     const rows = await sheets.getRows();
