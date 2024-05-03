@@ -1,7 +1,7 @@
 export const getImages = () => {
   const fetchImages = async () => {
     return new Promise((resolve, reject) => {
-      const getData = fetch('http://localhost:3000/api/get', {
+      const getData = fetch(`./api/get`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
