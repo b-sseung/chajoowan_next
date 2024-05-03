@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 import { flexCol, flexRow } from '../css/common';
 import MainMenu from './MainMenu';
 import Image from 'next/image';
+import { getImages } from '../js';
 
 const ColumnBox = styled.div(
   flexCol,
@@ -78,18 +79,27 @@ const playImageStyle = {
 };
 const PlayImageBox = () => {};
 
-const MainBody = ({ images }) => {
-  const [playList, setPlayList] = useState(images);
+const MainBody = () => {
+  const [playList, setPlayList] = useState({});
   const [playListImage, setPlayListImage] = useState();
   const [playIndex, setPlayIndex] = useState(0);
 
   useEffect(() => {
+    const images = async () => {
+      const result = await getImages();
+      setPlayList(result);
+    };
+    images();
+  }, []);
+
+  useEffect(() => {
     const changeImage = () => {
+      if (Object.keys(playList).length == 0) return;
       const row = playList[playIndex]['data'];
       setPlayListImage(row['image']);
     };
     changeImage();
-  }, [playIndex]);
+  }, [playList, playIndex]);
 
   return (
     <ColumnBox style={{ flexGrow: '1', width: '100%', position: 'relative', overflowY: 'hidden' }}>
@@ -109,7 +119,7 @@ const MainBody = ({ images }) => {
           <p>19:99</p>
         </PlayBox>
       </ColumnBox>
-      <MainMenu rows={images} onClickEvent={setPlayIndex}></MainMenu>
+      <MainMenu rows={playList} onClickEvent={setPlayIndex}></MainMenu>
     </ColumnBox>
   );
 };
