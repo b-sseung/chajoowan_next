@@ -93,7 +93,7 @@ const MainBody = ({ images }) => {
 
   return (
     <ColumnBox style={{ flexGrow: '1', width: '100%', position: 'relative', overflowY: 'hidden' }}>
-      <div style={playImageStyle}>{playListImage == null ? '' : <Image layout="fill" style={{ objectFit: 'contain' }} src={playListImage} alt="image"></Image>}</div>
+      <div style={playImageStyle}>{playListImage == null ? '' : <Image fill style={{ objectFit: 'contain' }} src={playListImage} alt="image"></Image>}</div>
       <ColumnBox style={{ height: '150px', marginBottom: '70px' }}>
         <IconBox>
           <BiSkipPrevious style={{ width: '2.5em', height: '2.5em' }}></BiSkipPrevious>

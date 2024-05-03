@@ -121,7 +121,7 @@ const SelectBox = ({ name, onChange }) => {
 };
 
 const ImageView = ({ data }) => {
-  return <Image width={200} height={200} layout="fill" style={{ objectFit: 'contain' }} alt="" src={data}></Image>;
+  return <Image width={200} height={200} fill style={{ objectFit: 'contain' }} alt="" src={data}></Image>;
 };
 
 // event

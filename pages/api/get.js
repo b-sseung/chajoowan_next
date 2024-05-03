@@ -20,7 +20,7 @@ const handler = async (req, res) => {
     const doc = new GoogleSpreadsheet(process.env.GOOGLE_SHEET_ID, serviceAccountAuth);
     await doc.loadInfo();
 
-    const body = req.body;
+    const { body } = req;
 
     console.log(doc);
     console.log(body);

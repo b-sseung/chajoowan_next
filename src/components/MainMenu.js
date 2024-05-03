@@ -141,7 +141,7 @@ const NextContentItem = ({ row, isPlay, index, onClickItem }) => {
   return (
     <Item onClick={() => onClickItem(index)}>
       <Img>
-        <Image layout="fill" style={{ objectFit: 'contain' }} src={item['image']} alt="image"></Image>
+        <Image fill style={{ objectFit: 'contain' }} src={item['image']} alt="image"></Image>
       </Img>
       <Alt>
         <div>{item['date']}</div>
