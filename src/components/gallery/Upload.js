@@ -121,7 +121,7 @@ const SelectBox = ({ name, onChange }) => {
 };
 
 const ImageView = ({ data }) => {
-  return <Image width={200} height={200} fill style={{ objectFit: 'contain' }} alt="" src={data}></Image>;
+  return <Image width={200} height={200} style={{ objectFit: 'contain' }} alt="" src={data}></Image>;
 };
 
 // event
@@ -226,7 +226,7 @@ const UploadGallery = () => {
         file_extension: initState['file_extension'][index],
       };
 
-      const insertResponse = await fetch('/api/insert', {
+      await fetch('/api/insert', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -322,12 +322,15 @@ const UploadGallery = () => {
         id="load"
         style={{
           display: 'none',
+          position: 'absolute',
           width: '100%',
           height: '100%',
           textAlign: 'center',
           background: '#55555588',
           fontSize: '30px',
           fontWeight: 'bold',
+          top: '0',
+          alignContent: 'center',
         }}
       >
         loading...
