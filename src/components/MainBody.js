@@ -102,7 +102,7 @@ const MainBody = () => {
   }, [playList, playIndex]);
 
   return (
-    <ColumnBox style={{ flexGrow: '1', width: '100%', position: 'relative', overflowY: 'hidden' }}>
+    <ColumnBox style={{ flexGrow: '1', width: '100%', position: 'relative', overflowY: 'hidden', color: 'black' }}>
       <div style={playImageStyle}>{playListImage == null ? '' : <Image fill style={{ objectFit: 'contain' }} src={playListImage} alt="image"></Image>}</div>
       <ColumnBox style={{ height: '150px', marginBottom: '70px' }}>
         <IconBox>

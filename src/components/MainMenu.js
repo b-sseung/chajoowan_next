@@ -21,6 +21,7 @@ const UnderMenu = styled.div(
 
     width: min(98vw, 600px);
     height: 100%;
+    color: black;
 
     top: calc(100% - 60px);
 

@@ -24,7 +24,7 @@ const Header = () => {
   diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
 
   return (
-    <ColumnBox style={{ height: '100px' }}>
+    <ColumnBox style={{ height: '100px', color: 'black' }}>
       <p style={{ fontFamily: 'Black Han Sans', fontSize: '25px' }}>{diff}일 째 사랑하는 중</p>
       <p style={{ fontSize: '13px' }}>차주완 ♥ 찻잔</p>
     </ColumnBox>

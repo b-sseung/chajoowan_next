@@ -11,18 +11,19 @@ import { flexRow, flexCol } from '@/src/css/common';
 // css
 const ParentDiv = styled.div(
   css`
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '15px',
-  
-    height: '100vh',
-    background: 'white',
-    padding: '15px',
-  
-    position: 'relative',
-  
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    height: 100vh;
+    background: white;
+    color: black;
+    padding: 15px;
+
+    position: relative;
+
     /* iOS only */
-    @supports (-webkit-touch-callout: none) { 
+    @supports (-webkit-touch-callout: none) {
       height: -webkit-fill-available;
     }
   `
