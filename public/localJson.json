@@ -2,10 +2,10 @@
   "source": {
     "0": { "title": "인스타그램 게시물", "content": "instagram" },
     "1": { "title": "인스타그램 스토리", "content": "instagram_story" },
-    "1": { "title": "인스타그램 라이브", "content": "instagram_live" },
-    "2": { "title": "X", "content": "twitter" },
-    "3": { "title": "유튜브", "content": "youtube" },
-    "4": { "title": "웨이보", "content": "weibo" },
-    "5": { "title": "기타", "content": "etd" }
+    "2": { "title": "인스타그램 라이브", "content": "instagram_live" },
+    "3": { "title": "X", "content": "twitter" },
+    "4": { "title": "유튜브", "content": "youtube" },
+    "5": { "title": "웨이보", "content": "weibo" },
+    "6": { "title": "기타", "content": "etd" }
   }
 }
