@@ -9,17 +9,24 @@ import imageCompression from 'browser-image-compression';
 import { flexRow, flexCol } from '@/src/css/common';
 
 // css
-const ParentStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '15px',
-
-  height: '100vh',
-  background: 'white',
-  padding: '15px',
-
-  position: 'relative',
-};
+const ParentDiv = styled.div(
+  css`
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '15px',
+  
+    height: '100vh',
+    background: 'white',
+    padding: '15px',
+  
+    position: 'relative',
+  
+    /* iOS only */
+    @supports (-webkit-touch-callout: none) { 
+      height: -webkit-fill-available;
+    }
+  `
+);
 
 const CustomDatePicker = styled.div(
   css`
@@ -250,7 +257,7 @@ const UploadGallery = () => {
 
   return (
     <>
-      <div style={ParentStyle}>
+      <ParentDiv>
         <div>
           <p>업로드 일자</p>
           <CustomDatePicker>
@@ -317,7 +324,7 @@ const UploadGallery = () => {
         >
           등록하기
         </button>
-      </div>
+      </ParentDiv>
       <div
         id="load"
         style={{

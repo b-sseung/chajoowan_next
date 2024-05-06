@@ -9,6 +9,11 @@ const ParentBox = styled.div(
     height: 100vh;
     background: white;
     overflow-x: hidden;
+
+    /* iOS only */
+    @supports (-webkit-touch-callout: none) {
+      height: -webkit-fill-available;
+    }
   `
 );
 
