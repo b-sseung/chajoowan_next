@@ -256,11 +256,11 @@ const MainMenu = ({ rows, onClickEvent }) => {
         </SwiperSlide>
         <SwiperSlide style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
           <div style={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
-            <InfoItem icon={<CgProfile style={{ width: '30px', height: '30px' }} />} text="인물소개" link=""></InfoItem>
-            <InfoItem icon={<FaInstagram style={{ width: '30px', height: '30px' }} />} text="인스타그램" link=""></InfoItem>
-            <InfoItem icon={<FaWeibo style={{ width: '30px', height: '30px' }} />} text="웨이보" link=""></InfoItem>
-            <InfoItem icon={<FaGlobe style={{ width: '30px', height: '30px' }} />} text="공식홈페이지" link=""></InfoItem>
-            <InfoItem icon={<FaRegBuilding style={{ width: '30px', height: '30px' }} />} text="소속사" link=""></InfoItem>
+            <InfoItem icon={<CgProfile style={{ width: '30px', height: '30px' }} />} text="인물소개" link="https://namu.wiki/w/%EC%B0%A8%EC%A3%BC%EC%99%84"></InfoItem>
+            <InfoItem icon={<FaInstagram style={{ width: '30px', height: '30px' }} />} text="인스타그램" link="https://www.instagram.com/chajoowan"></InfoItem>
+            <InfoItem icon={<FaWeibo style={{ width: '30px', height: '30px' }} />} text="웨이보" link="https://m.weibo.cn/p/index?extparam=车柱完ChaJooWan&containerid=10080811d1ebc98c8169ee313fcc77d25a2bdb&luicode=10000011&lfid=100103type%3D1%26q%3D차주완"></InfoItem>
+            <InfoItem icon={<FaGlobe style={{ width: '30px', height: '30px' }} />} text="공식홈페이지" link="https://post.naver.com/helloworldent"></InfoItem>
+            <InfoItem icon={<FaRegBuilding style={{ width: '30px', height: '30px' }} />} text="소속사" link="https://www.instagram.com/official.helloworldent/"></InfoItem>
           </div>
         </SwiperSlide>
         <SwiperSlide>
