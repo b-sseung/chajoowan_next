@@ -8,6 +8,7 @@ import { CgProfile } from 'react-icons/cg';
 import { FaWeibo, FaInstagram, FaRegBuilding, FaGlobe } from 'react-icons/fa';
 import { MdOutlineCheckBox, MdOutlineCheckBoxOutlineBlank } from 'react-icons/md';
 import { flexCol, flexRow } from '../css/common';
+import Link from 'next/link'
 
 const UnderMenu = styled.div(
   flexCol,
@@ -181,8 +182,10 @@ const InfoStyle = styled.div(
 const InfoItem = ({ icon, text, link }) => {
   return (
     <InfoStyle>
-      {icon}
-      <p>{text}</p>
+      <Link href={link}>
+        {icon}
+        <p>{text}</p>
+      </Link>
     </InfoStyle>
   );
 };
