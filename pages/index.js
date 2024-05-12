@@ -2,6 +2,7 @@ import Header from '@/src/components/Header';
 import MainBody from '@/src/components/MainBody';
 import styled, { css } from 'styled-components';
 import { flexCol } from '@/src/css/common';
+
 const ParentBox = styled.div(
   flexCol,
   css`

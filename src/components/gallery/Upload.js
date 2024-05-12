@@ -119,7 +119,7 @@ const SelectBox = ({ name, onChange }) => {
       {Object.keys(list).map((key) => {
         const item = list[key];
         return (
-          <option key={item['content']} value={item['content']}>
+          <option key={item['content']} value={key}>
             {item['title']}
           </option>
         );

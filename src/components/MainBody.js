@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { BiPause, BiSkipPrevious, BiSkipNext, BiSolidHeartCircle, BiSolidHeart, BiX } from 'react-icons/bi';
 import styled, { css } from 'styled-components';
-import { flexCol, flexRow } from '../css/common';
+import { flexCol, flexRow, LoadingStyle } from '../css/common';
 import MainMenu from './MainMenu';
 import Image from 'next/image';
 import { getImages } from '../js';
@@ -77,6 +77,14 @@ const playImageStyle = {
   border: '1px solid gray',
   position: 'relative',
 };
+
+const playImageLoadingStyle = {
+  ...playImageStyle,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+};
+
 const PlayImageBox = () => {};
 
 const MainBody = () => {
@@ -103,7 +111,9 @@ const MainBody = () => {
 
   return (
     <ColumnBox style={{ flexGrow: '1', width: '100%', position: 'relative', overflowY: 'hidden', color: 'black' }}>
-      <div style={playImageStyle}>{playListImage == null ? '' : <Image fill style={{ objectFit: 'contain' }} src={playListImage} alt="image"></Image>}</div>
+      <div style={playListImage == null ? playImageLoadingStyle : playImageStyle}>
+        {playListImage == null ? <LoadingStyle></LoadingStyle> : <Image fill style={{ objectFit: 'contain' }} src={playListImage} alt="image"></Image>}
+      </div>
       <ColumnBox style={{ height: '150px', marginBottom: '70px' }}>
         <IconBox>
           <BiSkipPrevious style={{ width: '2.5em', height: '2.5em' }}></BiSkipPrevious>

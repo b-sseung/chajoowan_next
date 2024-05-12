@@ -7,8 +7,8 @@ import Image from 'next/image';
 import { CgProfile } from 'react-icons/cg';
 import { FaWeibo, FaInstagram, FaRegBuilding, FaGlobe } from 'react-icons/fa';
 import { MdOutlineCheckBox, MdOutlineCheckBoxOutlineBlank } from 'react-icons/md';
-import { flexCol, flexRow } from '../css/common';
-import Link from 'next/link'
+import { LoadingStyle, flexCol, flexRow } from '../css/common';
+import Link from 'next/link';
 
 const UnderMenu = styled.div(
   flexCol,
@@ -160,7 +160,6 @@ const InfoStyle = styled.div(
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    width: 20%;
     font-size: 10px;
     margin: 10px;
     aspect-ratio: 1 / 1;
@@ -181,12 +180,12 @@ const InfoStyle = styled.div(
 
 const InfoItem = ({ icon, text, link }) => {
   return (
-    <InfoStyle>
-      <Link href={link}>
+    <Link href={link} style={{ width: '20%' }}>
+      <InfoStyle>
         {icon}
         <p>{text}</p>
-      </Link>
-    </InfoStyle>
+      </InfoStyle>
+    </Link>
   );
 };
 
@@ -255,13 +254,24 @@ const MainMenu = ({ rows, onClickEvent }) => {
             {Object.values(rows).map((item, index) => {
               return <NextContentItem key={`nexContent${index}`} row={item} isPlay={playIndex === index} index={index} onClickItem={clickNextcontent}></NextContentItem>;
             })}
+            {rows.length === undefined ? (
+              <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <LoadingStyle></LoadingStyle>
+              </div>
+            ) : (
+              ''
+            )}
           </SwipeBox>
         </SwiperSlide>
         <SwiperSlide style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
           <div style={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
             <InfoItem icon={<CgProfile style={{ width: '30px', height: '30px' }} />} text="인물소개" link="https://namu.wiki/w/%EC%B0%A8%EC%A3%BC%EC%99%84"></InfoItem>
             <InfoItem icon={<FaInstagram style={{ width: '30px', height: '30px' }} />} text="인스타그램" link="https://www.instagram.com/chajoowan"></InfoItem>
-            <InfoItem icon={<FaWeibo style={{ width: '30px', height: '30px' }} />} text="웨이보" link="https://m.weibo.cn/p/index?extparam=车柱完ChaJooWan&containerid=10080811d1ebc98c8169ee313fcc77d25a2bdb&luicode=10000011&lfid=100103type%3D1%26q%3D차주완"></InfoItem>
+            <InfoItem
+              icon={<FaWeibo style={{ width: '30px', height: '30px' }} />}
+              text="웨이보"
+              link="https://m.weibo.cn/p/index?extparam=车柱完ChaJooWan&containerid=10080811d1ebc98c8169ee313fcc77d25a2bdb&luicode=10000011&lfid=100103type%3D1%26q%3D차주완"
+            ></InfoItem>
             <InfoItem icon={<FaGlobe style={{ width: '30px', height: '30px' }} />} text="공식홈페이지" link="https://post.naver.com/helloworldent"></InfoItem>
             <InfoItem icon={<FaRegBuilding style={{ width: '30px', height: '30px' }} />} text="소속사" link="https://www.instagram.com/official.helloworldent/"></InfoItem>
           </div>
