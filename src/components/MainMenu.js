@@ -254,7 +254,7 @@ const MainMenu = ({ rows, onClickEvent }) => {
             {Object.values(rows).map((item, index) => {
               return <NextContentItem key={`nexContent${index}`} row={item} isPlay={playIndex === index} index={index} onClickItem={clickNextcontent}></NextContentItem>;
             })}
-            {rows.length === undefined ? (
+            {Object.keys(rows).length === 0 ? (
               <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <LoadingStyle></LoadingStyle>
               </div>
