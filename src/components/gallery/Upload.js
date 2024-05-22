@@ -26,6 +26,11 @@ const ParentDiv = styled.div(
     @supports (-webkit-touch-callout: none) {
       height: -webkit-fill-available;
     }
+
+    @media (min-width: 720px) {
+      width: 720px;
+      margin: 0px auto;
+    }
   `
 );
 
